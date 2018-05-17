@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox spacing="5.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainSceneController">
+   <children>
+      <ImageView fx:id="frame" fitHeight="240.0" fitWidth="480.0" pickOnBounds="true" preserveRatio="true" />
+      <VBox disable="true" prefWidth="220.0" spacing="5.0">
+         <children>
+            <Label text="Recognition resolution">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" text="Width" />
+            <Slider blockIncrement="8.0" majorTickUnit="40.0" max="960.0" min="160.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="480.0" />
+            <Label layoutX="10.0" layoutY="27.0" text="Height" />
+            <Slider blockIncrement="8.0" majorTickUnit="40.0" max="640.0" min="120.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="272.0" />
+            <Label layoutX="10.0" layoutY="44.0" text="Model">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <HBox prefWidth="200.0" spacing="5.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" selected="true" text="fast">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="modelTg" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" text="original" toggleGroup="$modelTg" />
+               </children>
+            </HBox>
+            <Label layoutX="10.0" layoutY="61.0" />
+            <Label layoutX="10.0" layoutY="78.0" />
+            <Label layoutX="10.0" layoutY="95.0" />
+         </children>
+         <HBox.margin>
+            <Insets top="5.0" />
+         </HBox.margin>
+      </VBox>
+      <Button fx:id="btnStart" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#start" text="Start" />
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</HBox>
