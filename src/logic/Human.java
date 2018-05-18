@@ -3,7 +3,8 @@ package logic;
 import java.util.Arrays;
 import java.util.List;
 
-public class Human {
+public class Human
+{
     public static List<String> parts = Arrays.asList("nose", "neck", "rShoulder", "rElbow", "rWist", "lShoulder", "lElbow",
             "lWrist", "rHip", "rKnee", "rAnkle", "lHip", "lKnee", "lAnkle", "rEye", "lEye", "rEar", "lEar");
     public int parts_coords[][] = new int[18][2];

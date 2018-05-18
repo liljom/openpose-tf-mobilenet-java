@@ -8,8 +8,10 @@ import org.opencv.core.Core;
 
 import java.io.IOException;
 
-public class App extends Application {
-    public static void main(String[] args) {
+public class App extends Application
+{
+    public static void main(String[] args)
+    {
         // load the native OpenCV library
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
@@ -17,8 +19,8 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
-
+    public void start(Stage stage) throws IOException
+    {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gui/MainScene.fxml"));
         Pane root = loader.load();
         Scene scene = new Scene(root);

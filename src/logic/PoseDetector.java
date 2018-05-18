@@ -5,7 +5,8 @@ import logic.tensorflow.TensorFlowInferenceInterface;
 import java.nio.file.Paths;
 import java.util.Vector;
 
-public class PoseDetector {
+public class PoseDetector
+{
     private final String MODEL_FILE = "resources/thin.pb";
     private final String INPUT_NAME = "image";
     private final String OUTPUT_NAME = "Openpose/concat_stage7";
@@ -33,7 +34,8 @@ public class PoseDetector {
     private int inWidth;
     private int inHeight;
 
-    public PoseDetector(String colorChannels, int width, int height) {
+    public PoseDetector(String colorChannels, int width, int height)
+    {
         inWidth = width;
         inHeight = height;
         MapWidth = width / 8;
@@ -49,7 +51,8 @@ public class PoseDetector {
         }
     }
 
-    public void setImage(int[] rgbImage) {
+    public void setImage(int[] rgbImage)
+    {
         if (rgbImage.length != inWidth * inHeight) {
             System.err.println("input size doesn't match (" + inWidth + "x" + inHeight + ")");
         } else {
@@ -63,7 +66,8 @@ public class PoseDetector {
         }
     }
 
-    public Vector<Human> recognizePoses() {
+    public Vector<Human> recognizePoses()
+    {
 
         inferenceInterface.feed(INPUT_NAME, float_image, 1, inHeight, inWidth, 3);
 
