@@ -10,6 +10,7 @@ import logic.Human;
 import logic.PoseDetector;
 
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.util.List;
@@ -31,8 +32,8 @@ public class MainSceneController
     private boolean cameraActive;
     private long time = System.currentTimeMillis();
 
-    private final int inWidth = 488;
-    private final int inHeight = 272;
+    private final int inWidth = 512;
+    private final int inHeight = 288;
 
     public void init()
     {
@@ -42,11 +43,13 @@ public class MainSceneController
     @FXML
     void start()
     {
-        if (!this.cameraActive) {
+        if (!this.cameraActive)
+        {
 
             camera = new Camera(1920, 1080, 0);
 
-            if (camera.getVideoCapture().isOpened()) {
+            if (camera.getVideoCapture().isOpened())
+            {
                 this.cameraActive = true;
 
                 // grab a frame every minimum 33 ms (max 30 frames/sec)
@@ -67,11 +70,16 @@ public class MainSceneController
                 this.timer.scheduleAtFixedRate(frameGrabber, 0, 33, TimeUnit.MILLISECONDS);
 
                 this.btnStart.setText("Stop");
-            } else {
+            }
+            else
+            {
                 System.err.println("Failed to open the camera connection...");
             }
-        } else {
+        }
+        else
+        {
             this.cameraActive = false;
+            camera.stop();
             this.btnStart.setText("Start");
             this.stopAcquisition();
         }
@@ -92,21 +100,42 @@ public class MainSceneController
         System.out.println("whole cycle took " + dTime);
         time = System.currentTimeMillis();
 
-        for (Human human : recognitions) {
-            for (int i = 0; i < 18; i++) {
+        Stroke stroke = canvas.getStroke();
+        canvas.setStroke(new BasicStroke(2));
+        canvas.setColor(Color.green);
+
+        int[][] pairs = PoseDetector.CocoPairs;
+
+        for (Human human : recognitions)
+        {
+            for (int i = 0; i < 18; i++)
+            {
                 int x = human.parts_coords[i][1] * 8;
                 int y = human.parts_coords[i][0] * 8;
 
-                Stroke stroke = canvas.getStroke();
-                canvas.setStroke(new BasicStroke(2));
-                canvas.setColor(Color.green);
-                canvas.drawOval(x, y, 6, 6);
-                canvas.drawString(Human.parts.get(i), x - 2, y - 2);
-                double fps = Math.round(10000.0 / dTime) / 10.0;
-                canvas.drawString(fps + " fps", 20, 20);
-                canvas.setStroke(stroke);
+                if (x != 0 && y !=0)
+                {
+                    canvas.drawOval(x, y, 6, 6);
+//                    canvas.drawString(Human.parts.get(i), x - 4, y - 4);
+
+                    for (int j = 0; j < pairs.length; j++)
+                    {
+                        if (pairs[j][0] == i)
+                        {
+                            int v = human.parts_coords[pairs[j][1]][1] * 8;
+                            int w = human.parts_coords[pairs[j][1]][0] * 8;
+                            if (v != 0 && w != 0)
+                            {
+                                canvas.draw(new Line2D.Double(x, y, v, w));
+                            }
+                        }
+                    }
+                }
             }
         }
+        canvas.setStroke(stroke);
+        double fps = Math.round(10000.0 / dTime) / 10.0;
+        canvas.drawString(fps + " fps", 20, 20);
 
         Image im = SwingFXUtils.toFXImage(imgOriginal, null);
         frame.setImage(im);
@@ -114,12 +143,15 @@ public class MainSceneController
 
     public void stopAcquisition()
     {
-        if (this.timer != null && !this.timer.isShutdown()) {
-            try {
+        if (this.timer != null && !this.timer.isShutdown())
+        {
+            try
+            {
                 // stop the timer
                 this.timer.shutdown();
                 this.timer.awaitTermination(33, TimeUnit.MILLISECONDS);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException e)
+            {
                 // log any exception
                 System.err.println("Exception in stopping the frame capture, trying to release the camera now... " + e);
             }

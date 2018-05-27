@@ -13,7 +13,7 @@
 
 <HBox spacing="5.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainSceneController">
    <children>
-      <ImageView fx:id="frame" fitHeight="240.0" fitWidth="480.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="frame" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true" />
       <VBox disable="true" prefWidth="220.0" spacing="5.0">
          <children>
             <Label text="Recognition resolution">

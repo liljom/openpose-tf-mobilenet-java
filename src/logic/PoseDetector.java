@@ -12,17 +12,17 @@ public class PoseDetector
     private final String OUTPUT_NAME = "Openpose/concat_stage7";
     private final float NMS_Threshold = 0.15f;
     private final float Local_PAF_Threshold = 0.2f;
-    private final float Part_Score_Threshold = 0.13f;
+    private final float Part_Score_Threshold = 0.2f;
     private final int PAF_Count_Threshold = 5;
     private final int Part_Count_Threshold = 4;
     private int MapHeight;
     private int MapWidth;
     private final int HeatMapCount = 19;
-    private final int MaxPairCount = 19;
+    private final int MaxPairCount = 17;
     private final int PafMapCount = 38;
     private final int MaximumFilterSize = 5;
-    private final int[][] CocoPairs = {{1, 2}, {1, 5}, {2, 3}, {3, 4}, {5, 6}, {6, 7}, {1, 8}, {8, 9}, {9, 10}, {1, 11},
-            {11, 12}, {12, 13}, {1, 0}, {0, 14}, {14, 16}, {0, 15}, {15, 17}, {2, 16}, {5, 17}};
+    public static final int[][] CocoPairs = {{1, 2}, {1, 5}, {2, 3}, {3, 4}, {5, 6}, {6, 7}, {1, 8}, {8, 9}, {9, 10}, {1, 11},
+            {11, 12}, {12, 13}, {1, 0}, {0, 14}, {14, 16}, {0, 15}, {15, 17}};
     private final int[][] CocoPairsNetwork = {{12, 13}, {20, 21}, {14, 15}, {16, 17}, {22, 23}, {24, 25}, {0, 1}, {2, 3},
             {4, 5}, {6, 7}, {8, 9}, {10, 11}, {28, 29}, {30, 31}, {34, 35}, {32, 33}, {36, 37}, {18, 19}, {26, 27}};
 
