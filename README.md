@@ -1,7 +1,7 @@
 Crazy many thaks for Ildoo for his work, which provided a very good base for this project.
 (https://github.com/ildoonet/tf-pose-estimation)
 
-Live human pose estimation using TensorFlow MobileNet, OpenPose, Java and OpenCV
+Lightweight, live human pose estimation using TensorFlow MobileNet, OpenPose, Java and OpenCV, running on CPU
 
 Requirements:
 - Java 8
